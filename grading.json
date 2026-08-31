@@ -1,0 +1,6 @@
+[
+ {"test": "FindHorseSpaceTest", "name": "HorseBarn.findHorseSpace", "points": 20},
+ {"test": "ConsolidateTest",    "name": "HorseBarn.consolidate",    "points": 30},
+ {"test": "GetPeakIndexTest",   "name": "Mountain.getPeakIndex",    "points": 25},
+ {"test": "IsMountainTest",     "name": "Mountain.isMountain",      "points": 25}
+]

@@ -1,9 +1,7 @@
-/*  DO NOT MODIFY THIS CLASS
- * This class is used for creating a horse object in the
- * HorseBarn class and for testing purposes. No changes should
- * occur in the class.
+/** PROVIDED - do not change
+ * A Horse has a name and a weight in pounds. HorseBarn stores Horse objects
+ * in its array of spaces; the tests build Horse objects to fill a barn.
  */
-
 public class Horse {
     private String name;
     private int weight;
