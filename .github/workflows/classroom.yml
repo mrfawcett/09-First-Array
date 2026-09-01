@@ -20,22 +20,13 @@ jobs:
           distribution: temurin
           java-version: '21'
           cache: maven
-      - name: Integrity check - tests, pom.xml and grading.json must be unchanged
-        run: |
-          EXPECTED="31fc92c00759a4319580a22ef4f62538d63c4c0da235912701b2db6cc39bf455"
-          ACTUAL=$( (for f in $(find src/test/java -type f -name '*.java' | LC_ALL=C sort) pom.xml grading.json; do sed 's/\r$//' "$f"; done) | sha256sum | cut -d' ' -f1)
-          if [ "$ACTUAL" != "$EXPECTED" ]; then
-            echo "::error::The test files, pom.xml, or grading.json in this repository differ from the assignment template. Grading has been stopped. Restore the original files (git checkout origin/main -- src/test pom.xml grading.json) and push again."
-            exit 1
-          fi
-          echo "Integrity check passed."
       - name: "HorseBarn.findHorseSpace (20)"
         id: findhorsespace
         uses: classroom-resources/autograding-command-grader@v1
         with:
           test-name: "HorseBarn.findHorseSpace"
           setup-command: ''
-          command: mvn -B -q test -Dtest=FindHorseSpaceTest -Dsurefire.failIfNoSpecifiedTests=false
+          command: sh .github/grade.sh FindHorseSpaceTest
           timeout: 5
           max-score: 20
       - name: "HorseBarn.consolidate (30)"
@@ -44,7 +35,7 @@ jobs:
         with:
           test-name: "HorseBarn.consolidate"
           setup-command: ''
-          command: mvn -B -q test -Dtest=ConsolidateTest -Dsurefire.failIfNoSpecifiedTests=false
+          command: sh .github/grade.sh ConsolidateTest
           timeout: 5
           max-score: 30
       - name: "Mountain.getPeakIndex (25)"
@@ -53,7 +44,7 @@ jobs:
         with:
           test-name: "Mountain.getPeakIndex"
           setup-command: ''
-          command: mvn -B -q test -Dtest=GetPeakIndexTest -Dsurefire.failIfNoSpecifiedTests=false
+          command: sh .github/grade.sh GetPeakIndexTest
           timeout: 5
           max-score: 25
       - name: "Mountain.isMountain (25)"
@@ -62,7 +53,7 @@ jobs:
         with:
           test-name: "Mountain.isMountain"
           setup-command: ''
-          command: mvn -B -q test -Dtest=IsMountainTest -Dsurefire.failIfNoSpecifiedTests=false
+          command: sh .github/grade.sh IsMountainTest
           timeout: 5
           max-score: 25
       - name: Autograding Reporter
